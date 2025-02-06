@@ -1,0 +1,49 @@
+/* 
+  Style your elements by creating CSS classes here.
+  Below, you can see an example of a class called "menu" that changes the color of the text to blue. Modify according to your needs.
+*/
+
+.menu {
+  color: blue;
+}
+
+
+.menu-item {
+  display: flex;  /* Aligns the image and text side by side */
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.menu-item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item-details h2,
+.menu-item-details p {
+  margin: 0;
+  padding: 5px;
+}
+.menu-item img {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;  /* Aligns price and button in the same line */
+  gap: 10px;  /* Adds space between the price and the button */
+  width: 100vw;
+  justify-content: space-between;  /* Distributes the items (price and button) on opposite ends */
+}
+.menu-title-img {
+  width: 100%; /* Adjust as needed */
+  height: auto; 
+  display: block;
+  margin-bottom: 20px; /* Adds space below the image */
+}
+
+
+
