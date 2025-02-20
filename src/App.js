@@ -1,5 +1,7 @@
 import './App.css';
 import MenuItem from './components/MenuItem';
+import React, { useState } from 'react';
+
 
 // import 'bootstrap/dist/css/bootstrap.min.css'; // This imports bootstrap css styles. You can use bootstrap or your own classes by using the className attribute in your elements.
 
@@ -79,7 +81,35 @@ const menuItems = [
 ];
 
 
+
 function App() {
+
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [counts, setCounts] = useState(menuItems.map(() => 0));
+
+  const updateCount = (index, newCount) => {
+    setCounts(prevCounts => prevCounts.map((count, i) => (i === index ? newCount : count)));
+  };
+
+
+  const handleOrder = () => {
+    let orderMessage = `Order Placed: $${totalPrice.toFixed(2)}\n`;
+  
+    menuItems.forEach((item, index) => {
+      const itemCount = counts[index];
+      if (itemCount > 0) {
+        orderMessage += `You have ordered ${itemCount} ${item.title}(s)\n`;
+      }
+    });
+  
+    if (totalPrice === 0) {
+      alert("No items in cart");
+    } else {
+      alert(orderMessage.trim());
+    }
+  };
+
+
   return (
     <div>
       <img 
@@ -94,12 +124,28 @@ function App() {
           description={item.description} 
           price={item.price} 
           image={`/images/${item.imageName}`} 
+          setTotalPrice={setTotalPrice}
+          count={counts[index]}
+          setCount={newCount => updateCount(index, newCount)}
         />
       ))}
-
       </div>
+
+      <div className="bottomline">
+        <h1>Total Price: ${totalPrice.toFixed(2)}</h1>
+        <button onClick={() => {setTotalPrice(0); setCounts(menuItems.map(() => 0));}}>Clear All</button>
+        <button onClick={handleOrder}>Place Order</button>
+      </div>
+
+
     </div>
+
   );
 }
 
+
+
+
 export default App;
+
+
